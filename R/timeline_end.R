@@ -8,6 +8,7 @@ ui <- shiny::bootstrapPage(
                                    max = max(data$yearoftow),
                                    value = min(data$yearoftow),
                                    sep = "",
+                                   ticks = FALSE,
                                    animate = animationOptions(interval = 600))
   )
 )
