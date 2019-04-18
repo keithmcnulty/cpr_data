@@ -1,0 +1,88 @@
+---
+title: "CPR Ocean Plastics Explorer"
+resource_files:
+- data/data.RDS
+- R/setup.R
+- R/controls.R
+- R/incid_end.R
+- R/timeline_end.R
+runtime: shiny
+output:
+  flexdashboard::flex_dashboard:
+    navbar:
+    - align: right
+      href: mailto:keith.mcnulty@gmail.com
+      icon: fa-envelope
+      title: Contact App Author
+    - href: https://github.com/keithmcnulty/cpr_data
+      icon: fa-github
+      title: View Code
+    orientation: rows
+    theme: cerulean
+    vertical_layout: scroll
+---
+
+```{r setup, include = FALSE, code = readLines('R/setup.R')}
+
+# basic settings and data load
+
+```
+
+
+
+
+
+
+Sidebar {.sidebar data-width=300}
+===============================================
+
+
+<br>
+
+<b>Note:</b> When viewing Timelines, ensure to select filters <i>before</i> pressing play.
+
+<br>
+
+``` {r controls, code = readLines('R/controls.R') }
+
+# sidebar UI controls
+
+
+```
+
+View Incidents
+===============================================
+
+
+Row {.tabset .tabset-fade data-height=700}
+-----------------------------------------------
+
+### Incidents by tow end point
+
+``` {r generate starting point view, code = readLines('R/incid_end.R')}
+
+# generate view by incident end
+
+```
+
+
+
+View Timeline 
+===============================================
+
+
+
+Row {.tabset .tabset-fade data-height=700}
+-----------------------------------------------
+
+### Timeline by tow end point
+
+``` {r generate timeline starting point view, code = readLines('R/timeline_end.R')}
+
+# generate animated timeline by end point
+
+```
+
+
+
+
