@@ -19,15 +19,17 @@ colnames(data)[grepl("region", colnames(data))] <- "region"
 data <- data %>% 
   dplyr::mutate(
     type = dplyr::case_when(
-      grepl("net", observation, ignore.case = TRUE) == TRUE ~ "Netting",
-      grepl("line | twine", observation, ignore.case = TRUE) == TRUE ~ "Line",
-      grepl("rope", observation, ignore.case = TRUE) == TRUE ~ "Rope",
-      grepl("bag", observation, ignore.case = TRUE) == TRUE ~ "Bag",
-      grepl("monofilament", observation, ignore.case = TRUE) == TRUE ~ "Monofilament",
-      sum(grepl("string | cord | tape | binding | fibre", observation, ignore.case = TRUE)) > 0 ~ "String",
+      grepl("net", observation, ignore.case = TRUE) ~ "Netting",
+      grepl("line|twine|fishing", observation, ignore.case = TRUE) ~ "Line",
+      grepl("rope", observation, ignore.case = TRUE) ~ "Rope",
+      grepl("bag|plastic", observation, ignore.case = TRUE) ~ "Bag",
+      grepl("monofilament", observation, ignore.case = TRUE) ~ "Monofilament",
+      grepl("string|cord|tape|binding|fibre", observation, ignore.case = TRUE) ~ "String",
       1L == 1L ~ "Unclassified"
   )
 )
+
+# save as an RDS file
 
 saveRDS(data, "data/data.RDS")
 
