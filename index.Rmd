@@ -23,6 +23,10 @@ output:
     - href: https://github.com/keithmcnulty/cpr_data
       icon: fa-github
       title: View Code
+    - align: right
+      href: http://twitter.com/share?url=https://keith-mcnulty.shinyapps.io/cpr_explorer
+      icon: fa-twitter
+      title: Share
     orientation: rows
     theme: cerulean
     vertical_layout: scroll
@@ -39,13 +43,16 @@ output:
 
 
 
-Sidebar {.sidebar data-width=300}
+Sidebar {.sidebar data-width=300} 
 ===============================================
 
 
 <br>
-
-<b>Note:</b> When viewing Timelines, ensure to select filters <i>before</i> pressing play.
+This app allows you to view incidences of man-made plastics discovered in Continuous Plankton Recorders (CPRs) towed in the North Atlantic, Arctic and European Waters.  CPRs have been towed through these waters since the 1930s, but the first incident of man-made plastic interference was recorded in 1957.
+<br><br>
+This app allows you to view some simple statistics about these incidents, as well as visualize the location, timeline and basic information on each incident.  For more information on the CPR study see the recent paper in <a href="https://www.nature.com/articles/s41467-019-09506-1">Nature</a>, which contains a link to the data used for this app.
+<hr>
+Filters can be applied below for all analyses conducted in this app.  <b>Note:</b> When viewing Timelines, ensure to select filters <i>before</i> pressing play.
 
 <br>
 

@@ -1,6 +1,6 @@
 # basic settings and libraries
 
-knitr::opts_chunk$set(echo = FALSE)
+knitr::opts_chunk$set(echo = FALSE)  ## ensure code is not echoed throughout app
 
 library(flexdashboard)
 library(tidyverse)
@@ -12,11 +12,7 @@ library(ggplot2)
 data <- readRDS("data/data.RDS")
 
 
-# filters and colors
-
-# generate all incidents view in leaflet
-
-# create map color and filtered df
+# create global filtered df generated from main sidebar inputs, adding colors for incident type
 
 data_filt <- reactive({
   data %>%
@@ -33,7 +29,7 @@ data_filt <- reactive({
     )
 })
 
-# create color legend df
+# create color legend df for inserting into leaflet maps
 
 legend <- data.frame(
   type = c("Netting", "Line", "Rope", "Bag", "Monofilament", "String", "Unclassified"),
@@ -41,13 +37,16 @@ legend <- data.frame(
 )
 
 
-# useful functions to save time
+# useful function to add circle markers to maps (to save repetitive coding)
 
 addMarks <- function (x, type = c("start", "end"), clusters = NULL) {
   
-  long <- paste0("~tow_lon_", type)
+  ## define longitude and latitude depending on start or end of tow
+  
+  long <- paste0("~tow_lon_", type)  
   latit <- paste0("~tow_lat_", type)
   
+  ##  insert co-ordinates as formulae into leaflet::addCirclemarkers(), with no clustering as default
 
   leaflet::addCircleMarkers(x, lng = as.formula(long), 
                               lat = as.formula(latit),
