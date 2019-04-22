@@ -5,6 +5,7 @@ knitr::opts_chunk$set(echo = FALSE)
 library(flexdashboard)
 library(tidyverse)
 library(leaflet)
+library(ggplot2)
 
 # load data
 
@@ -40,3 +41,17 @@ legend <- data.frame(
 )
 
 
+# useful functions to save time
+
+addMarks <- function (x, type = c("start", "end"), clusters = NULL) {
+  
+  long <- paste0("~tow_lon_", type)
+  latit <- paste0("~tow_lat_", type)
+  
+
+  leaflet::addCircleMarkers(x, lng = as.formula(long), 
+                              lat = as.formula(latit),
+                              popup = ~paste0(yearoftow, ": ", observation), radius = 3, 
+                              color = ~color,
+                              clusterOptions = clusters)
+}

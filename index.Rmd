@@ -4,8 +4,14 @@ resource_files:
 - data/data.RDS
 - R/setup.R
 - R/controls.R
+- R/boxplots.R
+- R/histogram.R
+- R/incid_start.R
 - R/incid_end.R
+- R/incid_path.R
+- R/timeline_start.R
 - R/timeline_end.R
+- R/timeline_path.R
 runtime: shiny
 output:
   flexdashboard::flex_dashboard:
@@ -50,6 +56,36 @@ Sidebar {.sidebar data-width=300}
 
 ```
 
+
+
+View statistics
+===============================================
+
+Row
+---------------------------------------
+
+### Incident boxplots
+
+``` {r generate incident boxplots, code = readLines('R/boxplots.R')}
+
+# generate incident boxplots
+
+```
+
+
+Row
+--------------------------------------
+
+### Incident density histogram
+
+``` {r generate incident density histogram, code = readLines('R/histogram.R')}
+
+# generate incident density histogram
+
+```
+
+
+
 View Incidents
 ===============================================
 
@@ -57,13 +93,22 @@ View Incidents
 Row {.tabset .tabset-fade data-height=700}
 -----------------------------------------------
 
+### Incidents by tow start point
+
+``` {r generate starting point view, code = readLines('R/incid_start.R')}
+
+# generate view by incident start
+
+```
+
 ### Incidents by tow end point
 
-``` {r generate starting point view, code = readLines('R/incid_end.R')}
+``` {r generate end point view, code = readLines('R/incid_end.R')}
 
 # generate view by incident end
 
 ```
+
 
 
 
@@ -75,14 +120,21 @@ View Timeline
 Row {.tabset .tabset-fade data-height=700}
 -----------------------------------------------
 
-### Timeline by tow end point
+### Timeline by tow start point
 
-``` {r generate timeline starting point view, code = readLines('R/timeline_end.R')}
+``` {r generate timeline starting point view, code = readLines('R/timeline_start.R')}
 
-# generate animated timeline by end point
+# generate animated timeline by start point
 
 ```
 
 
+### Timeline by tow end point
+
+``` {r generate timeline end point view, code = readLines('R/timeline_end.R')}
+
+# generate animated timeline by end point
+
+```
 
 

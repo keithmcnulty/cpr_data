@@ -3,11 +3,12 @@ ui <- shiny::bootstrapPage(
   shiny::tags$style(type = "text/css", "html, body {width:100%;height:100%}"),
   leaflet::leafletOutput("timeline_start"),
   shiny::absolutePanel(top = 10, right = 10,
-                       sliderInput("animation", "Year:",
+                       sliderInput("animation_start", "Year:",
                                    min = min(data$yearoftow),
                                    max = max(data$yearoftow),
                                    value = min(data$yearoftow),
                                    sep = "",
+                                   ticks = FALSE,
                                    animate = animationOptions(interval = 600))
   )
 )
@@ -16,7 +17,7 @@ ui <- shiny::bootstrapPage(
 server <- function(input, output) {
 
   data_filt_anim <- shiny::reactive({
-    data_filt() %>% dplyr::filter(yearoftow <= input$animation)
+    data_filt() %>% dplyr::filter(yearoftow <= input$animation_start)
   })
     
   output$timeline_start <- leaflet::renderLeaflet({
@@ -34,8 +35,7 @@ server <- function(input, output) {
   shiny::observe({
     leaflet::leafletProxy("timeline_start", data = data_filt_anim()) %>%
       leaflet::clearShapes() %>%
-      leaflet::addCircleMarkers(lng = ~tow_lon_end, lat = ~tow_lat_end,
-                  radius = 3, color = ~color, popup = ~paste0(yearoftow, ": ", observation))
+      addMarks("start")
   })
     
 }

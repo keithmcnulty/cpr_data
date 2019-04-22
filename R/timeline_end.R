@@ -1,9 +1,9 @@
 
 ui <- shiny::bootstrapPage(
   shiny::tags$style(type = "text/css", "html, body {width:100%;height:100%}"),
-  leaflet::leafletOutput("timeline_start"),
+  leaflet::leafletOutput("timeline_end"),
   shiny::absolutePanel(top = 10, right = 10,
-                       sliderInput("animation", "Year:",
+                       sliderInput("animation_end", "Year:",
                                    min = min(data$yearoftow),
                                    max = max(data$yearoftow),
                                    value = min(data$yearoftow),
@@ -17,10 +17,10 @@ ui <- shiny::bootstrapPage(
 server <- function(input, output) {
 
   data_filt_anim <- shiny::reactive({
-    data_filt() %>% dplyr::filter(yearoftow <= input$animation)
+    data_filt() %>% dplyr::filter(yearoftow <= input$animation_end)
   })
     
-  output$timeline_start <- leaflet::renderLeaflet({
+  output$timeline_end <- leaflet::renderLeaflet({
     leaflet::leaflet() %>%
       leaflet::addTiles() %>%
       leaflet::addProviderTiles(providers$CartoDB.Positron) %>%
@@ -33,10 +33,9 @@ server <- function(input, output) {
   })
     
   shiny::observe({
-    leaflet::leafletProxy("timeline_start", data = data_filt_anim()) %>%
+    leaflet::leafletProxy("timeline_end", data = data_filt_anim()) %>%
       leaflet::clearShapes() %>%
-      leaflet::addCircleMarkers(lng = ~tow_lon_end, lat = ~tow_lat_end,
-                  radius = 3, color = ~color, popup = ~paste0(yearoftow, ": ", observation))
+      addMarks("end")
   })
     
 }
